@@ -22,8 +22,11 @@
 #### virtualbox
 - oracle 에서 만든 무료 가상화 툴
 - 윈도우 호스트에서 거북이 문제 발생 시 다음 방법으로 해결
+  
 ![turtle_problem](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/turtle.png)
+
 [turtle solution](https://learn.microsoft.com/en-us/troubleshoot/windows-client/application-management/virtualization-apps-not-work-with-hyper-v)
+
 ![after_turtle](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/noturtle.png)
 - 문제해결 시 위와같이 V 아이콘이 뜨며 멈춤현상이 줄어드는 모습을 볼 수 있음
 
