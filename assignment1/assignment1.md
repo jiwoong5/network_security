@@ -94,3 +94,31 @@
 - 실습에 사용된 계정 계정인 ubuntuserver201924511 의 password 는 so 로 시작함
 ![passworddump](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/passworddump.png)
 - ack 240부터 password가 plain text로 출력된 것을 볼 수 있음
+
+# 실습 2
+- 강의자료 11p~15p를 참고하여 dsniff를 사용해 sniffing 공격을 수행하라
+
+## 실습 준비
+### hypervisor 설정 동일
+![kalivirtualmachine](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/kalivirtualmachine.png)
+
+### 운영체제
+- kali linux 2025.3 사용
+- dsniff, arpspoof 등 다양한 툴 기본제공
+
+### telnet 사용
+
+## 실습 과정
+### virtual machine setting
+![kalinetwork](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/kalinetwork.png)
+- ubuntu 와 다르게 GUI환경 사용이 원할하여 GUI를 사용하여 진행
+- eth0: 호스트와 통신. 10.0.2.15 사용. 따로 설정없이 virtualbox 네트워크 란에서 포트포워딩 룰만 추가. (2225 > 22)
+- eth1: 게스트간 통신. 192.168.56.109. vm 내부에서 192.168.56.109로 수동 설정.
+
+### virtual machine setting server 동일
+
+## 실험결과
+![clienttelnet](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/clienttelnet.png)
+- 실습 1과 같이 client에서 server로 telnet을 이용하여 login 을 시도
+![kalidsniff](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/kalidsniff.png)
+- eth1 과 연결된 host-only 회선을 사용함으로 prom mode 로 패킷수집 및 정제
