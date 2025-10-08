@@ -17,21 +17,21 @@
 #### virtual machine 구성
 - virtualbox 이용 가상화를 통해 윈도우 기반 랩탑 위에 ubuntu 등 운영체제를 올려서 사용
 - 실습 1을 위해 3개의 가상머신 ubuntu server, ubuntu client, ubuntu sniffer 를 사용
-![virtualmachine]()
+![virtualmachine](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/virtualmachine.png)
 
 #### virtualbox
 - oracle 에서 만든 무료 가상화 툴
 - 윈도우 호스트에서 거북이 문제 발생 시 다음 방법으로 해결
-![turtle_problem]()
+![turtle_problem](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/turtle.png)
 [turtle solution](https://learn.microsoft.com/en-us/troubleshoot/windows-client/application-management/virtualization-apps-not-work-with-hyper-v)
-![after_turtle]()
+![after_turtle](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/noturtle.png)
 - 문제해결 시 위와같이 V 아이콘이 뜨며 멈춤현상이 줄어드는 모습을 볼 수 있음
 
 #### virtual machine 하드웨어 설정
 - 램: 2GB , CPU: 2개, HDD: 20GB 사용
 
 #### virtual machine 네트워크 설정
-![ipsetting]()
+![ipsetting](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/ipsetting.png)
 - NAT: 10.0.2.15 고정. server-2222/22, client-2223/22, sniffer-2224/22 (호스트-게스트 통신에 사용)
 - 호스트 전용 어뎁터: server-192.158.56.102, client-192.168.56.105, sniffer-192.158.56.107 (게스트-게스트간 통신에 사용)
 
@@ -59,35 +59,35 @@
 ## 실습 과정
 ### virtual machine setting 공통
 - 각 virtual machine 에서 sudo apt update 및 sudo apt install openssh-server 동작
-![natproblem]()
+![natproblem](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/natproblem.png)
 - 위와같이 enp0s3에 ip 주소가 할당되지 않은 경우 sudo apt update 등이 제대로 동작하지 않음
 - 이 때 nat 네트워크 수동설정 by sudo ip link set dev enp0s3 up << 요걸로 enp0s3 활성화, sudo ip addr add 10.0.2.15/24 dev enp0s3, sudo ip route add default via 10.0.2.2, echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf, echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
 - 과제 요구사항에 맞게 사용자 이름 설정 by sudo adduser ubuntuclient201924511, sudo usermod -aG sudo ubuntuclient201924511
 
 ### virtual machine setting sniffer
 - sniffer의 경우 다른 ip로 가는 패킷을 sniffing하기 위해 promiscuous mode 를 켜야함
-![promicious1]()
+![promicious1](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/promiscuousmode.png)
 - 먼저 virtualbox-네트워크-어뎁터2(호스트전용)-promiscuous 부분에서 모두허용으로 설정
-![promicious2]()
+![promicious2](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/promiscuousmode2.png)
 - vm 내부에서 promiscuous on by sudo ip link set enp0s8 promisc on
 
 ### virtual machine setting server
-![telnetsetting]()
+![telnetsetting](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/telnet_setting.png)
 - telnet 설정: server 23번 포트 사용
 - telnet /usr/sbin/in.telnetd 관련 문제: 설정파일이 없다고 뜨는 경우 sbin 에서 ls 후 비슷한 이름을 찾아 대체해볼 것. (ex. /usr/sbin/telnetd)
 
 ## 실습 결과
 ### 서버 로그인 
-![accountdump]()
+![accountdump](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/accountdump.png)
 
 ### account dump
 - 실습에 사용된 계정은 ubuntuserver 계정인 ubuntuserver201924511
-![accountdump1]()
-![accountdump2]()
-![accountdump3]()
+![accountdump1](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/accountdump1.png)
+![accountdump2](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/accountdump2.png)
+![accountdump3](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/accountdump3.png)
 - 위의 결과를 분석해보면 ack166~186 까지 계정명이 plain text로 출력된 것을 볼 수 있음
 
 ### password dump
 - 실습에 사용된 계정 계정인 ubuntuserver201924511 의 password 는 so 로 시작함
-![passworddump]()
+![passworddump](https://github.com/jiwoong5/network_security/blob/main/assignment1/src/passworddump.png)
 - ack 240부터 password가 plain text로 출력된 것을 볼 수 있음
