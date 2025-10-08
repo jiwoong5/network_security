@@ -31,6 +31,7 @@
 - 램: 2GB , CPU: 2개, HDD: 20GB 사용
 
 #### virtual machine 네트워크 설정
+![ipsetting]()
 - NAT: 10.0.2.15 고정. server-2222/22, client-2223/22, sniffer-2224/22 (호스트-게스트 통신에 사용)
 - 호스트 전용 어뎁터: server-192.158.56.102, client-192.168.56.105, sniffer-192.158.56.107 (게스트-게스트간 통신에 사용)
 
@@ -58,7 +59,9 @@
 ## 실습 과정
 ### virtual machine setting 공통
 - 각 virtual machine 에서 sudo apt update 및 sudo apt install openssh-server 동작
-- sudo apt update 등이 제대로 동작하지 않는 경우 nat 네트워크 수동설정 by sudo ip link set dev enp0s3 up << 요걸로 enp0s3 활성화, sudo ip addr add 10.0.2.15/24 dev enp0s3, sudo ip route add default via 10.0.2.2, echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf, echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
+![natproblem]()
+- 위와같이 enp0s3에 ip 주소가 할당되지 않은 경우 sudo apt update 등이 제대로 동작하지 않음
+- 이 때 nat 네트워크 수동설정 by sudo ip link set dev enp0s3 up << 요걸로 enp0s3 활성화, sudo ip addr add 10.0.2.15/24 dev enp0s3, sudo ip route add default via 10.0.2.2, echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf, echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
 - 과제 요구사항에 맞게 사용자 이름 설정 by sudo adduser ubuntuclient201924511, sudo usermod -aG sudo ubuntuclient201924511
 
 ### virtual machine setting sniffer
